@@ -1,14 +1,14 @@
 /********************************************************************************
-** Form generated from reading ui file 'prestation.ui'
+** Form generated from reading ui file 'prestations.ui'
 **
-** Created: Tue 2. Sep 20:21:28 2008
+** Created: Thu 4. Sep 14:05:51 2008
 **      by: Qt User Interface Compiler version 4.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
 
-#ifndef UI_PRESTATION_H
-#define UI_PRESTATION_H
+#ifndef UI_PRESTATIONS_H
+#define UI_PRESTATIONS_H
 
 #include <QtCore/QDate>
 #include <QtCore/QVariant>
@@ -203,7 +203,7 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-    Dialog->setWindowTitle(QApplication::translate("Dialog", "Prestation", 0, QApplication::UnicodeUTF8));
+    Dialog->setWindowTitle(QApplication::translate("Dialog", "MyPrestations", 0, QApplication::UnicodeUTF8));
     pushButton->setText(QApplication::translate("Dialog", "Ajouter", 0, QApplication::UnicodeUTF8));
     label_3->setText(QApplication::translate("Dialog", "Dur\303\251e", 0, QApplication::UnicodeUTF8));
     label_4->setText(QApplication::translate("Dialog", "Date", 0, QApplication::UnicodeUTF8));
@@ -226,4 +226,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_PRESTATION_H
+#endif // UI_PRESTATIONS_H

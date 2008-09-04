@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QFileInfo>
 #include <QDir>
-#include "prestation.h"
+#include "prestations.h"
 #include <QKeyEvent>
 
 

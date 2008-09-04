@@ -2,7 +2,7 @@
 #define __PRESTATION_H__
 
 #include <QDialog>
-#include "ui_prestation.h"
+#include "ui_prestations.h"
 #include "MonThread.h"
 
 class prestation : public QDialog, Ui::Dialog
