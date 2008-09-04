@@ -1,0 +1,20 @@
+This file has the goal to give you some information about the compilation process.
+
+First of all this application is developped in C++ with Qt.
+
+The initial developpment was made under windows vista. 
+
+In this case you need to install Qt with the MinGW and to config the PATH ( See the Qt installation doc)
+
+After this you need to use de Qt 4.4.x command prompt utilty to QMAKE the project.
+(a good idea is to change the 'start in' directory of the Qt command prompt to avoid many loos of time)
+
+Now you can do 
+
+...> qmake -project
+...> qmake MyPrestations.pro
+...> make
+
+The executable will be in the debug directory.
+
+
