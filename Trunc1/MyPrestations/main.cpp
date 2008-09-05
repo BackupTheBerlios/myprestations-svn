@@ -35,11 +35,8 @@
 	Send feedback to:  	 elyxis at users.berlios.de
 
 	TO DO 
+	see TODO.txt in INFO directory
 
-	Make a logo Descktop icone and systray icone + About Box picture
-	Manage diferent project
-	Made Myprestations code translatable ( and translate it ! 
- 
 */
 #include <QApplication>
 #include <QDialog>
