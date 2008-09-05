@@ -20,6 +20,9 @@ private slots:
 	void OnStartBtnClick();
 	void OnPauseBtnClick();
 	void OnEnvoyerBtnClick();
+private:
+	QStringList searchProjects();
+	
 };
 
 

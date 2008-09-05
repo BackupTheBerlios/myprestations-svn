@@ -64,7 +64,31 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 	QString a;
 	a = a.setNum(durtot);
 	label_2->setText(a + " minutes");
+	
+	comboBox_2->insertItems( 0, searchProjects() );
 }
+
+QStringList prestation::searchProjects(){
+	QFile file("prst.txt");
+	QFileInfo fInfo = QFileInfo(file);
+	QDir LeDir = QDir(fInfo.absoluteDir());
+	
+	QStringList LaListe;
+	
+    LeDir.setFilter(QDir::Files | QDir::NoSymLinks);
+    LeDir.setSorting(QDir::Time); // Classement selon date de modification 
+    QFileInfoList list = LeDir.entryInfoList();
+    //std::cout << "     Bytes Filename" << std::endl;
+    for (int i = 0; i < list.size(); ++i) {
+        QFileInfo fileInfo = list.at(i);
+		if (fileInfo.suffix() == "txt"){
+				LaListe << fileInfo.baseName();
+			}
+    }
+	return LaListe;
+}
+
+// QComboBox::insertItems ( int index, const QStringList & list )
 
 void prestation::OnStartBtnClick(){
 	dstart = QDateTime::currentDateTime();
