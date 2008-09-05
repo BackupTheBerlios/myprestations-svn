@@ -1,9 +1,11 @@
 Todo list:
 
+Manage diferent project ( -> create the interface to create a project )
+Make an installer
 Make a 'pause' button
 
 Make a logo Descktop icone and systray icone + About Box picture
-Manage diferent project
+
 Made Myprestations code translatable ( and translate it ! )
 
 If you have a request please contact me.

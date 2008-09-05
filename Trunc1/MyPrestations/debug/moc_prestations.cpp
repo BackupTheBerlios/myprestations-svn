@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'prestations.h'
 **
-** Created: Fri 5. Sep 16:27:35 2008
+** Created: Fri 5. Sep 20:08:43 2008
 **      by: The Qt Meta Object Compiler version 59 (Qt 4.4.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_prestation[] = {
        1,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   10, // methods
+       6,   10, // methods
        0,    0, // properties
        0,    0, // enums/sets
 
@@ -33,6 +33,7 @@ static const uint qt_meta_data_prestation[] = {
       52,   11,   11,   11, 0x08,
       70,   11,   11,   11, 0x08,
       88,   11,   11,   11, 0x08,
+     117,  108,   11,   11, 0x08,
 
        0        // eod
 };
@@ -41,6 +42,7 @@ static const char qt_meta_stringdata_prestation[] = {
     "prestation\0\0OnQuitterBtnClick()\0"
     "OnAjouterBtnClick()\0OnStartBtnClick()\0"
     "OnPauseBtnClick()\0OnEnvoyerBtnClick()\0"
+    "ProjName\0OnProjectChange(QString)\0"
 };
 
 const QMetaObject prestation::staticMetaObject = {
@@ -75,8 +77,9 @@ int prestation::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: OnStartBtnClick(); break;
         case 3: OnPauseBtnClick(); break;
         case 4: OnEnvoyerBtnClick(); break;
+        case 5: OnProjectChange((*reinterpret_cast< QString(*)>(_a[1]))); break;
         }
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

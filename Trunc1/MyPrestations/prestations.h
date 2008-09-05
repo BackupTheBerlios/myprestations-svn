@@ -20,8 +20,11 @@ private slots:
 	void OnStartBtnClick();
 	void OnPauseBtnClick();
 	void OnEnvoyerBtnClick();
+	void OnProjectChange( QString ProjName);
 private:
 	QStringList searchProjects();
+	void LoadProject(QString projectName);
+	void SaveProject(QString projectName);
 	
 };
 

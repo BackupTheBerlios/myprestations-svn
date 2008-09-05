@@ -12,7 +12,7 @@
 
 prestation::prestation(QWidget *parent):QDialog(parent)
 {
-	int durtot = 0;
+	
 	setupUi(this);
 	
 	lcdNumber->display(0);
@@ -28,12 +28,26 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 	connect(pushButton_5, SIGNAL(clicked()), this, SLOT(OnStopBtnClick()));
 	connect(pushButton_6, SIGNAL(clicked()), this, SLOT(OnEnvoyerBtnClick()));
 	connect(&UnThread, SIGNAL(pseudoclick()), this, SLOT(OnPauseBtnClick()));
-
+	connect(comboBox_2, SIGNAL(currentIndexChanged( const QString & )), this, SLOT(OnProjectChange( QString)));
 	
+	LoadProject("prst");
+	
+	comboBox_2->insertItems( 0, searchProjects() );
+}
+
+void prestation::LoadProject(QString projName){
+	int durtot = 0;
+	///
+	tableWidget->clear();
+	for (int i=tableWidget->rowCount()-1; i >= 0; --i)
+		tableWidget->removeRow(i);
+	
+
 	tableWidget->setHorizontalHeaderLabels(
 	QStringList() << tr("date") << tr("duree") << tr("description"));
 	dateEdit->setDate(QDate::currentDate());
-	QFile file("prst.txt");
+	///
+	QFile file(projName + ".txt");
 	if(!file.open(QIODevice::ReadOnly)){
 		std::cerr << "ca merde";
 	}
@@ -57,6 +71,7 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 		durtot += c2.toInt();
 		counter ++;
 	}
+	file.close();
 	tableWidget->scrollToItem( tableWidget->item(0, 0 ),QAbstractItemView::EnsureVisible );
 	tableWidget->resizeColumnsToContents();
 	tableWidget->horizontalHeader()->setStretchLastSection(true);
@@ -65,7 +80,31 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 	a = a.setNum(durtot);
 	label_2->setText(a + " minutes");
 	
-	comboBox_2->insertItems( 0, searchProjects() );
+}
+void prestation::SaveProject(QString projName){
+	// on fait un backup
+	// puis on réécrit le fichier avec le mise à jour 
+	QFile file(projName + ".txt");
+	QFileInfo fInfo = QFileInfo(file);
+	QString fPath = fInfo.absoluteFilePath();
+	QString fPath_ren = fPath;
+	QDir LeDir = QDir(fInfo.absoluteDir());
+	fPath_ren.chop(4);
+	fPath_ren += ".bak";
+	LeDir.rename(fPath, fPath_ren);
+	
+	if(!file.open(QIODevice::WriteOnly)){
+		std::cerr << "ca merde";
+	}
+	QTextStream out(&file);
+	int row = tableWidget->rowCount();
+	for (int i =0; i <row; i++){
+		
+		out << tableWidget->item(i, 0 )->text() << " ";
+		out << tableWidget->item(i, 1 )->text() << " ";
+		out << tableWidget->item(i, 2 )->text() << "\r\n"; 
+	}	
+
 }
 
 QStringList prestation::searchProjects(){
@@ -78,7 +117,6 @@ QStringList prestation::searchProjects(){
     LeDir.setFilter(QDir::Files | QDir::NoSymLinks);
     LeDir.setSorting(QDir::Time); // Classement selon date de modification 
     QFileInfoList list = LeDir.entryInfoList();
-    //std::cout << "     Bytes Filename" << std::endl;
     for (int i = 0; i < list.size(); ++i) {
         QFileInfo fileInfo = list.at(i);
 		if (fileInfo.suffix() == "txt"){
@@ -88,7 +126,12 @@ QStringList prestation::searchProjects(){
 	return LaListe;
 }
 
-// QComboBox::insertItems ( int index, const QStringList & list )
+
+void prestation::OnProjectChange( QString  ProjName){
+//label_2->setText(comboBox_2->currentText());
+LoadProject(comboBox_2->currentText());
+
+}
 
 void prestation::OnStartBtnClick(){
 	dstart = QDateTime::currentDateTime();
@@ -167,29 +210,11 @@ void prestation::OnAjouterBtnClick()
 	tableWidget->resizeColumnsToContents();
 	tableWidget->horizontalHeader()->setStretchLastSection(true);
 
-	// Une fois le tableau mis a jour
-	// on fait un backup
-	// puis on réécrit le fichier avec le mise à jour 
-	QFile file("prst.txt");
-	QFileInfo fInfo = QFileInfo(file);
-	QString fPath = fInfo.absoluteFilePath();
-	QString fPath_ren = fPath;
-	QDir LeDir = QDir(fInfo.absoluteDir());
-	fPath_ren.chop(4);
-	fPath_ren += ".bak";
-	LeDir.rename(fPath, fPath_ren);
+	// Une fois le tableau mis a jour on enregistre
+	SaveProject(comboBox_2->currentText());
 	
-	if(!file.open(QIODevice::WriteOnly)){
-		std::cerr << "ca merde";
-	}
-	QTextStream out(&file);
 	
-	for (int i =0; i <=row; i++){
-		
-		out << tableWidget->item(i, 0 )->text() << " ";
-		out << tableWidget->item(i, 1 )->text() << " ";
-		out << tableWidget->item(i, 2 )->text() << "\r\n"; 
-	}	
+	
 }
 void prestation::OnQuitterBtnClick(){
  close();
