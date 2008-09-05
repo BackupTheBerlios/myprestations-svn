@@ -77,9 +77,6 @@ void prestation::OnStartBtnClick(){
 	
 	UnThread.start();
 	//a.wait();
-
-	
-	
 }
 void prestation::OnPauseBtnClick(){
 	
@@ -87,9 +84,6 @@ void prestation::OnPauseBtnClick(){
 	int l1,l2, l3,l4, l5,l6;
 	int nbrsec = dstart.secsTo(dstop);
 	int h, m, s;
-	//h = nbrsec/3600;
-	//m = (nbrsec-(nbrsec/3600)*60)/60;
-	//s = (nbrsec-((nbrsec-(nbrsec/3600)*60)/60)*60)/60;
 	
 	h = nbrsec/3600;
 	m = (nbrsec % 3600)/60;
@@ -102,7 +96,6 @@ void prestation::OnPauseBtnClick(){
 	l5= h-((h/10)*10);
 	l6= h/10;
 
-	
 	lcdNumber->display((l1));
 	lcdNumber_2->display((l2));
 	lcdNumber_3->display((l3));
@@ -111,8 +104,15 @@ void prestation::OnPauseBtnClick(){
 	lcdNumber_6->display((l6));
 	
 	pushButton_6->setEnabled(true);
-
 	
+	if (UnThread.isFinished()){	
+		lcdNumber->display(0);
+		lcdNumber_2->display(0);
+		lcdNumber_3->display(0);
+		lcdNumber_4->display(0);
+		lcdNumber_5->display(0);
+		lcdNumber_6->display(0);
+	}		
 }
 void prestation::OnEnvoyerBtnClick(){
 	QString a;
@@ -122,13 +122,6 @@ void prestation::OnEnvoyerBtnClick(){
 	pushButton_5->setEnabled(false);
 	pushButton_6->setEnabled(true);
 	UnThread.stop();
-	lcdNumber->display(0);
-	lcdNumber_2->display(0);
-	lcdNumber_3->display(0);
-	lcdNumber_4->display(0);
-	lcdNumber_5->display(0);
-	lcdNumber_6->display(0);
-	
 }
 
 
@@ -152,6 +145,7 @@ void prestation::OnAjouterBtnClick()
 
 	// Une fois le tableau mis a jour
 	// on fait un backup
+	// puis on réécrit le fichier avec le mise à jour 
 	QFile file("prst.txt");
 	QFileInfo fInfo = QFileInfo(file);
 	QString fPath = fInfo.absoluteFilePath();
@@ -162,7 +156,7 @@ void prestation::OnAjouterBtnClick()
 	LeDir.rename(fPath, fPath_ren);
 	
 	if(!file.open(QIODevice::WriteOnly)){
-	std::cerr << "ca merde";
+		std::cerr << "ca merde";
 	}
 	QTextStream out(&file);
 	
@@ -171,24 +165,15 @@ void prestation::OnAjouterBtnClick()
 		out << tableWidget->item(i, 0 )->text() << " ";
 		out << tableWidget->item(i, 1 )->text() << " ";
 		out << tableWidget->item(i, 2 )->text() << "\r\n"; 
-	}
-	
-	
-	
-
-
-
-	// puis on réécrit le fichier avec le mise à jour 
+	}	
 }
-void prestation::OnQuitterBtnClick()
-{
+void prestation::OnQuitterBtnClick(){
  close();
 }
 
 //Capture de l'appuis sur escape pour empêcher la fermeture de la fenêtre par erreur
 
-void prestation::keyPressEvent(QKeyEvent *event)
-{
+void prestation::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Escape) {
        // doEscape();
     } else {
@@ -196,11 +181,10 @@ void prestation::keyPressEvent(QKeyEvent *event)
     }
 }
 
- //void MainWindow::writeSettings()
- //{
+ //void prestation::writeSettings(){
      //QSettings settings("Trolltech", "Application Example");
      //settings.setValue("pos", pos());
      //settings.setValue("size", size());
  //}
 
-//The writeSettings() function is called from closeEvent()
+//The writeSettings() function must be colled called from closeEvent()

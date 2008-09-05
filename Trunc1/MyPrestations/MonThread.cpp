@@ -5,7 +5,7 @@ MonThread::MonThread(){
 }
 
 void MonThread::run()
-    {
+    {	stopped = false;
         while (!stopped) {
             sleep( 1 );
             qDebug( "Ping!" );
