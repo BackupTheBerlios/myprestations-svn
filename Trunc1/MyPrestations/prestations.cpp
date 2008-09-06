@@ -3,8 +3,9 @@
 #include <iostream>
 #include <QFileInfo>
 #include <QDir>
-#include "prestations.h"
 #include <QKeyEvent>
+#include "prestations.h"
+#include "nouvproj.h"
 
 
 
@@ -30,9 +31,13 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 	connect(&UnThread, SIGNAL(pseudoclick()), this, SLOT(OnPauseBtnClick()));
 	connect(comboBox_2, SIGNAL(currentIndexChanged( const QString & )), this, SLOT(OnProjectChange( QString)));
 	
-	LoadProject("prst");
+	connect(pushButton_3, SIGNAL(clicked()), this, SLOT(OnNouveauProjetBtnClick()));
+	comboBox_2->insertItems( 0, searchProjects() );	
+	LoadProject("prst"); // a Remplacer par une recherche du dernier projet ou un enable false du tablewidget
 	
-	comboBox_2->insertItems( 0, searchProjects() );
+	
+	
+	
 }
 
 void prestation::LoadProject(QString projName){
@@ -91,6 +96,7 @@ void prestation::SaveProject(QString projName){
 	QDir LeDir = QDir(fInfo.absoluteDir());
 	fPath_ren.chop(4);
 	fPath_ren += ".bak";
+	LeDir.remove(fPath_ren);
 	LeDir.rename(fPath, fPath_ren);
 	
 	if(!file.open(QIODevice::WriteOnly)){
@@ -103,7 +109,26 @@ void prestation::SaveProject(QString projName){
 		out << tableWidget->item(i, 0 )->text() << " ";
 		out << tableWidget->item(i, 1 )->text() << " ";
 		out << tableWidget->item(i, 2 )->text() << "\r\n"; 
-	}	
+	}
+	file.close();
+
+}
+
+void prestation::CreateProject(QString projName){
+	QFile file(projName + ".txt");
+	QFileInfo fInfo = QFileInfo(file);
+		
+	if(!file.open(QIODevice::WriteOnly)){
+		std::cerr << "ca merde";
+	}
+	QTextStream out(&file);
+	file.close();
+	
+	comboBox_2->clear();
+	comboBox_2->insertItems( 0, searchProjects() );	
+	LoadProject(projName);
+	
+
 
 }
 
@@ -219,6 +244,18 @@ void prestation::OnAjouterBtnClick()
 void prestation::OnQuitterBtnClick(){
  close();
 }
+
+void prestation::OnNouveauProjetBtnClick(){
+
+	nouvprojdlg *ndialog = new nouvprojdlg();
+	QString result;
+	if ( ndialog->exec() == QDialog::Accepted ) {
+		result = ndialog->projName();
+		CreateProject(result);
+        }
+        delete ndialog;
+}
+
 
 //Capture de l'appuis sur escape pour empêcher la fermeture de la fenêtre par erreur
 

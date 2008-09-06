@@ -21,10 +21,13 @@ private slots:
 	void OnPauseBtnClick();
 	void OnEnvoyerBtnClick();
 	void OnProjectChange( QString ProjName);
+	void OnNouveauProjetBtnClick();
 private:
 	QStringList searchProjects();
 	void LoadProject(QString projectName);
 	void SaveProject(QString projectName);
+	void CreateProject(QString projectName);
+	
 	
 };
 

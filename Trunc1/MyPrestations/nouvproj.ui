@@ -1,0 +1,67 @@
+<ui version="4.0" >
+ <class>NPDialog</class>
+ <widget class="QDialog" name="NPDialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>222</width>
+    <height>92</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Nouveau projet</string>
+  </property>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>77</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Nom du projet</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>201</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton" >
+   <property name="geometry" >
+    <rect>
+     <x>60</x>
+     <y>60</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>60</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
