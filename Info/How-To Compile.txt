@@ -13,7 +13,7 @@ Now you can do
 
 ...> qmake -project
 ...> qmake MyPrestations.pro
-...> make
+...> make ( eventually 'make all' to have the debug and the release version ) 
 
 The executable will be in the debug directory.
 
