@@ -28,19 +28,25 @@ prestation::prestation(QWidget *parent):QDialog(parent)
 	connect(pushButton_4, SIGNAL(clicked()), this, SLOT(OnStartBtnClick()));
 	connect(pushButton_5, SIGNAL(clicked()), this, SLOT(OnStopBtnClick()));
 	connect(pushButton_6, SIGNAL(clicked()), this, SLOT(OnEnvoyerBtnClick()));
-	connect(&UnThread, SIGNAL(pseudoclick()), this, SLOT(OnPauseBtnClick()));
+	connect(&UnThread, SIGNAL(pseudoclick()), this, SLOT(OnPseudoClick()));
 	connect(comboBox_2, SIGNAL(currentIndexChanged( const QString & )), this, SLOT(OnProjectChange( QString)));
 	
 	connect(pushButton_3, SIGNAL(clicked()), this, SLOT(OnNouveauProjetBtnClick()));
 	comboBox_2->insertItems( 0, searchProjects() );	
-	LoadProject("prst"); // a Remplacer par une recherche du dernier projet ou un enable false du tablewidget
+	LoadProject(comboBox_2->currentText()); // a Remplacer par une recherche du dernier projet ou un enable false du tablewidget
 	
 	
 	
 	
 }
 
-void prestation::LoadProject(QString projName){
+void prestation::LoadProject(QString projoName){
+	QString projName;
+	if (projoName == "") 
+		projName = ".0.txt";
+	else
+		projName = projoName + ".prs";
+	
 	int durtot = 0;
 	///
 	tableWidget->clear();
@@ -52,7 +58,7 @@ void prestation::LoadProject(QString projName){
 	QStringList() << tr("date") << tr("duree") << tr("description"));
 	dateEdit->setDate(QDate::currentDate());
 	///
-	QFile file(projName + ".txt");
+	QFile file("data/" + projName );
 	if(!file.open(QIODevice::ReadOnly)){
 		std::cerr << "ca merde";
 	}
@@ -89,7 +95,7 @@ void prestation::LoadProject(QString projName){
 void prestation::SaveProject(QString projName){
 	// on fait un backup
 	// puis on réécrit le fichier avec le mise à jour 
-	QFile file(projName + ".txt");
+	QFile file("data/" + projName + ".prs");
 	QFileInfo fInfo = QFileInfo(file);
 	QString fPath = fInfo.absoluteFilePath();
 	QString fPath_ren = fPath;
@@ -115,7 +121,7 @@ void prestation::SaveProject(QString projName){
 }
 
 void prestation::CreateProject(QString projName){
-	QFile file(projName + ".txt");
+	QFile file("data/" + projName + ".prs");
 	QFileInfo fInfo = QFileInfo(file);
 		
 	if(!file.open(QIODevice::WriteOnly)){
@@ -133,7 +139,7 @@ void prestation::CreateProject(QString projName){
 }
 
 QStringList prestation::searchProjects(){
-	QFile file("prst.txt");
+	QFile file("data/.0.txt");
 	QFileInfo fInfo = QFileInfo(file);
 	QDir LeDir = QDir(fInfo.absoluteDir());
 	
@@ -144,10 +150,12 @@ QStringList prestation::searchProjects(){
     QFileInfoList list = LeDir.entryInfoList();
     for (int i = 0; i < list.size(); ++i) {
         QFileInfo fileInfo = list.at(i);
-		if (fileInfo.suffix() == "txt"){
+		if (fileInfo.suffix() == "prs"){
 				LaListe << fileInfo.baseName();
 			}
     }
+	if (list.size() == 0) {pushButton->setEnabled(false);}
+	else {pushButton->setEnabled(true);}
 	return LaListe;
 }
 
@@ -166,11 +174,17 @@ void prestation::OnStartBtnClick(){
 	pushButton_5->setEnabled(true);
 	pushButton_6->setEnabled(false);
 	
+	pushButton_3->setEnabled(false);
+	comboBox_2->setEnabled(false);
+	
+	
 	
 	UnThread.start();
 	//a.wait();
 }
-void prestation::OnPauseBtnClick(){
+
+void prestation::OnPauseBtnClick(){}
+void prestation::OnPseudoClick(){
 	
 	dstop = QDateTime::currentDateTime();
 	int l1,l2, l3,l4, l5,l6;
@@ -204,6 +218,7 @@ void prestation::OnPauseBtnClick(){
 		lcdNumber_4->display(0);
 		lcdNumber_5->display(0);
 		lcdNumber_6->display(0);
+		pushButton_6->setEnabled(false);
 	}		
 }
 void prestation::OnEnvoyerBtnClick(){
@@ -212,13 +227,19 @@ void prestation::OnEnvoyerBtnClick(){
 	lineEdit->setText(a);
 	pushButton_4->setEnabled(true);
 	pushButton_5->setEnabled(false);
-	pushButton_6->setEnabled(true);
+	
+	pushButton_3->setEnabled(true);
+	comboBox_2->setEnabled(true);
 	UnThread.stop();
 }
 
 
 void prestation::OnAjouterBtnClick()
-{	int row = tableWidget->rowCount();
+{	
+
+if (lineEdit->text() != "")
+{
+	int row = tableWidget->rowCount();
 	tableWidget->insertRow(row);
 	
 	QTableWidgetItem *item1 = new QTableWidgetItem;
@@ -234,9 +255,18 @@ void prestation::OnAjouterBtnClick()
 	tableWidget->scrollToItem( item1,QAbstractItemView::EnsureVisible );
 	tableWidget->resizeColumnsToContents();
 	tableWidget->horizontalHeader()->setStretchLastSection(true);
+	lineEdit->setText("");
 
 	// Une fois le tableau mis a jour on enregistre
 	SaveProject(comboBox_2->currentText());
+} else {
+
+
+ QMessageBox::warning(this, "Erreur",
+                           "<html>Dur&eacute;e incorrecte :<br>Servez vous du chronom&egrave;tre ou ins&eacute;rez une dur&eacute;e manuellement</html>" );
+						   
+
+}
 	
 	
 	

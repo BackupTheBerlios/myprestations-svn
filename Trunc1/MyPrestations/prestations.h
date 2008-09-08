@@ -19,6 +19,8 @@ private slots:
 	void OnAjouterBtnClick();
 	void OnStartBtnClick();
 	void OnPauseBtnClick();
+	void OnPseudoClick();
+	
 	void OnEnvoyerBtnClick();
 	void OnProjectChange( QString ProjName);
 	void OnNouveauProjetBtnClick();

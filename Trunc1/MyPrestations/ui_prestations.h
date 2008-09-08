@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'prestations.ui'
 **
-** Created: Thu 4. Sep 14:05:51 2008
+** Created: Mon 8. Sep 14:52:39 2008
 **      by: Qt User Interface Compiler version 4.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -46,19 +46,19 @@ public:
     QFrame *frame_2;
     QPushButton *pushButton_6;
     QLCDNumber *lcdNumber;
-    QPushButton *pushButton_5;
     QPushButton *pushButton_4;
     QLCDNumber *lcdNumber_2;
     QLCDNumber *lcdNumber_3;
     QLCDNumber *lcdNumber_4;
     QLCDNumber *lcdNumber_5;
     QLCDNumber *lcdNumber_6;
+    QPushButton *pushButton_5;
 
     void setupUi(QDialog *Dialog)
     {
     if (Dialog->objectName().isEmpty())
         Dialog->setObjectName(QString::fromUtf8("Dialog"));
-    Dialog->resize(784, 624);
+    Dialog->resize(782, 624);
     frame = new QFrame(Dialog);
     frame->setObjectName(QString::fromUtf8("frame"));
     frame->setGeometry(QRect(10, 490, 401, 121));
@@ -115,7 +115,7 @@ public:
     pushButton_6 = new QPushButton(frame_2);
     pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
     pushButton_6->setEnabled(false);
-    pushButton_6->setGeometry(QRect(10, 90, 91, 23));
+    pushButton_6->setGeometry(QRect(10, 90, 131, 23));
     lcdNumber = new QLCDNumber(frame_2);
     lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
     lcdNumber->setGeometry(QRect(122, 46, 20, 31));
@@ -128,13 +128,9 @@ public:
     lcdNumber->setSegmentStyle(QLCDNumber::Filled);
     lcdNumber->setProperty("value", QVariant(2));
     lcdNumber->setProperty("intValue", QVariant(2));
-    pushButton_5 = new QPushButton(frame_2);
-    pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-    pushButton_5->setEnabled(false);
-    pushButton_5->setGeometry(QRect(102, 10, 41, 23));
     pushButton_4 = new QPushButton(frame_2);
     pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-    pushButton_4->setGeometry(QRect(10, 10, 41, 23));
+    pushButton_4->setGeometry(QRect(10, 10, 131, 23));
     lcdNumber_2 = new QLCDNumber(frame_2);
     lcdNumber_2->setObjectName(QString::fromUtf8("lcdNumber_2"));
     lcdNumber_2->setGeometry(QRect(102, 46, 20, 31));
@@ -195,6 +191,10 @@ public:
     lcdNumber_6->setSegmentStyle(QLCDNumber::Filled);
     lcdNumber_6->setProperty("value", QVariant(2));
     lcdNumber_6->setProperty("intValue", QVariant(2));
+    pushButton_5 = new QPushButton(Dialog);
+    pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+    pushButton_5->setEnabled(false);
+    pushButton_5->setGeometry(QRect(790, 520, 41, 23));
 
     retranslateUi(Dialog);
 
@@ -213,8 +213,8 @@ public:
     pushButton_2->setText(QApplication::translate("Dialog", "Quitter", 0, QApplication::UnicodeUTF8));
     pushButton_3->setText(QApplication::translate("Dialog", "Nouveau projet", 0, QApplication::UnicodeUTF8));
     pushButton_6->setText(QApplication::translate("Dialog", "<< Envoyer", 0, QApplication::UnicodeUTF8));
-    pushButton_5->setText(QApplication::translate("Dialog", "Actu", 0, QApplication::UnicodeUTF8));
     pushButton_4->setText(QApplication::translate("Dialog", "Start", 0, QApplication::UnicodeUTF8));
+    pushButton_5->setText(QApplication::translate("Dialog", "Actu", 0, QApplication::UnicodeUTF8));
     Q_UNUSED(Dialog);
     } // retranslateUi
 

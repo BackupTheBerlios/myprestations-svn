@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>784</width>
+    <width>782</width>
     <height>624</height>
    </rect>
   </property>
@@ -217,7 +217,7 @@
      <rect>
       <x>10</x>
       <y>90</y>
-      <width>91</width>
+      <width>131</width>
       <height>23</height>
      </rect>
     </property>
@@ -262,28 +262,12 @@
      <number>2</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5" >
-    <property name="enabled" >
-     <bool>false</bool>
-    </property>
-    <property name="geometry" >
-     <rect>
-      <x>102</x>
-      <y>10</y>
-      <width>41</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text" >
-     <string>Actu</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_4" >
     <property name="geometry" >
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>41</width>
+      <width>131</width>
       <height>23</height>
      </rect>
     </property>
@@ -476,6 +460,22 @@
      <number>2</number>
     </property>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
+   <property name="geometry" >
+    <rect>
+     <x>790</x>
+     <y>520</y>
+     <width>41</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Actu</string>
+   </property>
   </widget>
  </widget>
  <resources/>
