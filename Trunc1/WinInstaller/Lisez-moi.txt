@@ -1,6 +1,8 @@
+L'installeur pour les versions windows de MyPrestation est rélaisé grace à l'outil OpenSource NSIS.
+
 Si vous avez téléchargé le code source via SVN, il manque dans ce répertoire le fichier suivant
 
 QtCore4.dll
 QtGuid4.dll
 
-pour pouvoir compiler le script NSI
+pour pouvoir compiler le script NSI.
